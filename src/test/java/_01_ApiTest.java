@@ -69,8 +69,18 @@ public class _01_ApiTest {
                 // Bunu hamcrest kütüphanesi yapıyor
         ;
 
+    }
+
+    @Test
+    public void checkHasItem() {
+        // Soru : "http://api.zippopotam.us/tr/01000"  endpoint in dönen
+        // place dizisinin herhangi bir elemanında  "Dörtağaç Köyü" değerinin
+        // olduğunu doğrulayınız
+
 
     }
+
+
 
 }
 
