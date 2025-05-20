@@ -70,7 +70,7 @@ public class _01_ApiTest {
     @Test
     public void checkHasItem() {
         // Soru : "http://api.zippopotam.us/tr/01000"  endpoint in dönen
-        // place dizisinin herhangi bir elemanında  "Dörtağaç Köyü" değerinin
+        // places dizisinin herhangi bir elemanında  "Dörtağaç Köyü" değerinin
         // olduğunu doğrulayınız
 
         given()
@@ -91,10 +91,36 @@ public class _01_ApiTest {
     @Test
     public void bodyArrayHasSizeTest() {
         // Soru : "http://api.zippopotam.us/us/90210"  endpoint in dönen
-        // place dizisinin dizi uzunluğunun 1 olduğunu doğrulayınız.
+        // places dizisinin dizi uzunluğunun 1 olduğunu doğrulayınız.
 
+        given()
+
+                .when()
+                .get("http://api.zippopotam.us/us/90210")
+
+                .then()
+                .body("places", hasSize(1))
+        ;
+    }
+
+    @Test
+    public void combiningTest() {
+
+        given()
+
+                .when()
+                .get("http://api.zippopotam.us/us/90210")
+
+                .then()
+                .statusCode(200) // assert
+                .contentType(ContentType.JSON)  // assert
+                .body("places", hasSize(1)) // assert
+                .body("places.'place name'", hasItem("Beverly Hills")) // assert
+                .body("country", equalTo("United States")) // assert
+        ;
 
     }
+
 
 }
 
