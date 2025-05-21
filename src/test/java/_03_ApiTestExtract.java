@@ -63,6 +63,20 @@ public class _03_ApiTestExtract {
 
        Assert.assertTrue(limit == 10);
     }
+
+
+    @Test
+    public void extractingJsonPath4() {
+        // Soru : "https://gorest.co.in/public/v1/users"  endpoint in den dönen
+        // data daki bütün idlerin içinde 7905915 değerinin geçtiğini
+        // TestNg assertion ile doğrulayınız.
+
+
+    }
+
+
+
+
 }
 
 
