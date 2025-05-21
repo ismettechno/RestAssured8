@@ -1,5 +1,8 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -9,16 +12,16 @@ public class _03_ApiTestExtract {
     public void extractingJsonPath() {
 
         //var dataUserID=pm.response.json().id;
-        String ulke=
-        given()
+        String ulke =
+                given()
 
-                .when()
-                .get("http://api.zippopotam.us/us/90210")
+                        .when()
+                        .get("http://api.zippopotam.us/us/90210")
 
-                .then()
-                .log().body()
-                .extract().path("country") // PATH i country olan değeri EXTRACT yap
-        ;
+                        .then()
+                        .log().body()
+                        .extract().path("country") // PATH i country olan değeri EXTRACT yap
+                ;
 
         System.out.println("ulke = " + ulke);
         Assert.assertEquals(ulke, "United States");
@@ -30,19 +33,19 @@ public class _03_ApiTestExtract {
         // place dizisinin ilk elemanının state değerinin  "California"
         // olduğunu testNG Assertion ile doğrulayınız
 
-        String state=
-        given()
-                .when()
-                .get("http://api.zippopotam.us/us/90210")
+        String state =
+                given()
+                        .when()
+                        .get("http://api.zippopotam.us/us/90210")
 
-                .then()
-                .log().body()
-                //.body("places[0].state", equalTo("California"))
-                .extract().path("places[0].state")  // extract en son komut olmalı
-        ;
+                        .then()
+                        .log().body()
+                        //.body("places[0].state", equalTo("California"))
+                        .extract().path("places[0].state")  // extract en son komut olmalı
+                ;
 
         System.out.println("state = " + state); // kendimize kontrol
-        Assert.assertEquals(state,"California"); // assert
+        Assert.assertEquals(state, "California"); // assert
     }
 
     @Test
@@ -50,18 +53,17 @@ public class _03_ApiTestExtract {
         // Soru : "https://gorest.co.in/public/v1/users"  endpoint in den dönen
         // limit bilgisinin 10 olduğunu testNG ile doğrulayınız.
 
-       int limit=
-       given()
+        int limit =
+                given()
 
-               .when()
-               .get("https://gorest.co.in/public/v1/users")
+                        .when()
+                        .get("https://gorest.co.in/public/v1/users")
 
-               .then()
-               //.log().body()
-               .extract().path("meta.pagination.limit")
-       ;
+                        .then()
+                        //.log().body()
+                        .extract().path("meta.pagination.limit");
 
-       Assert.assertTrue(limit == 10);
+        Assert.assertTrue(limit == 10);
     }
 
 
@@ -71,10 +73,18 @@ public class _03_ApiTestExtract {
         // data daki bütün idlerin içinde 7905915 değerinin geçtiğini
         // TestNg assertion ile doğrulayınız.
 
+        ArrayList<Integer> idler =
+                given()
 
+                        .when()
+                        .get("https://gorest.co.in/public/v1/users")
+
+                        .then()
+                        .extract().path("data.id");
+
+        System.out.println("idler = " + idler);
+        Assert.assertTrue(idler.contains(7905915));
     }
-
-
 
 
 }
