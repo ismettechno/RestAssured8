@@ -86,6 +86,18 @@ public class _03_ApiTestExtract {
         Assert.assertTrue(idler.contains(7905915));
     }
 
+    @Test
+    public void extractingJsonPath5() {
+        // Soru : "https://gorest.co.in/public/v1/users"  endpoint in den dönen
+        // bütün name leri in içiden "Arnesh Achari" değerinin geçtiğini
+        // TestNg assertion ile doğrulayınız.
+
+
+    }
+
+
+
+
 
 }
 
