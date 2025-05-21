@@ -16,16 +16,16 @@ public class _02_ApiTestSpec {
     @BeforeClass
     public void Setup()
     {
-        reqSpec=new RequestSpecBuilder()
-                .setContentType(ContentType.JSON)
-                .log(LogDetail.URI)
+        reqSpec=new RequestSpecBuilder()   // istek paketi setlenmesi
+                .setContentType(ContentType.JSON)  // giden body cinsi
+                .log(LogDetail.URI)  // log.uri
+                //token
                 .build();
 
-        resSpec=new ResponseSpecBuilder()
+        resSpec=new ResponseSpecBuilder()  // cevap geldikten sonraki yapılacaklar
                 .log(LogDetail.BODY)
                 .expectContentType(ContentType.JSON)
                 .build();
-
     }
 
 
@@ -33,13 +33,13 @@ public class _02_ApiTestSpec {
     public void Test1()
     {
         given()
-                .spec(reqSpec)
+                .spec(reqSpec)  // istek paketi
 
                 .when()
                 .get("https://gorest.co.in/public/v1/users")
 
                 .then()
-                .spec(resSpec)
+                .spec(resSpec)  // dönüş yapılacakları
         ;
     }
 
@@ -47,13 +47,13 @@ public class _02_ApiTestSpec {
     public void Test2()
     {
         given()
-                .spec(reqSpec)
+                .spec(reqSpec) // istek paketi
 
                 .when()
                 .get("https://gorest.co.in/public/v1/users")
 
                 .then()
-                .spec(resSpec)
+                .spec(resSpec) // dönüş yapılacakları
         ;
     }
 
