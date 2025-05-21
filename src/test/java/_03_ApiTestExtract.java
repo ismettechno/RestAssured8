@@ -92,11 +92,18 @@ public class _03_ApiTestExtract {
         // bütün name leri in içiden "Arnesh Achari" değerinin geçtiğini
         // TestNg assertion ile doğrulayınız.
 
+        ArrayList<String> nameler =
+                given()
 
+                        .when()
+                        .get("https://gorest.co.in/public/v1/users")
+
+                        .then()
+                        .extract().path("data.name");
+
+        System.out.println("nameler = " + nameler);
+        Assert.assertTrue(nameler.contains("Arnesh Achari"));
     }
-
-
-
 
 
 }
