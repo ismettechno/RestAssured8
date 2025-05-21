@@ -118,9 +118,63 @@ public class _01_ApiTest {
                 .body("places.'place name'", hasItem("Beverly Hills")) // assert
                 .body("country", equalTo("United States")) // assert
         ;
-
     }
 
+    @Test
+    public void pathParamTest(){
+
+        given()
+                .pathParam("ulke","us")  // değişkenler hazırlandı
+                .pathParam("pk",90210)
+                .log().uri()   // oluşacak endpoint i yazdıralım
+
+                .when()
+                .get("http://api.zippopotam.us/{ulke}/{pk}")
+
+                .then()
+                .log().body()
+        ;
+    }
+
+    @Test
+    public void queryParamTest() {
+        //https://gorest.co.in/public/v1/users?page=3
+
+        given()
+                .param("page",3)
+                .log().uri()
+
+                .when()
+                .get("https://gorest.co.in/public/v1/users")
+
+                .then()
+                .log().body()
+        ;
+    }
+
+    @Test
+    public void queryParamTest2() {
+        // https://gorest.co.in/public/v1/users?page=3
+        // bu linkteki 1 den 10 kadar sayfaları çağırdığınızda response daki
+        // donen page degerlerinin çağrılan page nosu ile aynı
+        // olup olmadığını kontrol ediniz.
+
+        for(int p=1; p<=10 ;p++) {
+
+            given()
+                    .param("page",p)
+                    .log().uri()
+
+                    .when()
+                    .get("https://gorest.co.in/public/v1/users")
+
+                    .then()
+                    .body("meta.pagination.page", equalTo(p))
+            ;
+        }
+
+
+    }
 
 }
 
