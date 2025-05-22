@@ -22,6 +22,7 @@ public class _04_ApiTestPOJO {
         System.out.println("zipCodeNesnesi.getPlaces() = " + zipCodeNesnesi.getPlaces());
 
         System.out.println("zipCodeNesnesi = " + zipCodeNesnesi);
+
     }
 
 }
