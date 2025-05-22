@@ -1,4 +1,5 @@
 import Model.Place;
+import Model.User;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -96,9 +97,20 @@ public class _06_PathAndJsonPath {
         // https://gorest.co.in/public/v1/users  endpointte dönen Sadece Data Kısmını POJO
         // dönüşümü ile alarak yazdırınız.
 
+        List<User> userlar=
+        given()
 
+                .when()
+                .get("https://gorest.co.in/public/v1/users")
 
+                .then()
+                .extract().jsonPath().getList("data", User.class);
+        ;
 
+        System.out.println("userlar = " + userlar);
+
+        for(User u : userlar)
+            System.out.println("u = " + u);
     }
 
     
