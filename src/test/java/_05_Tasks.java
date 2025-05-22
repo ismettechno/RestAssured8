@@ -88,7 +88,8 @@ public class _05_Tasks {
 
         System.out.println("todoNesnesi = " + todoNesnesi);
 
-        System.out.println("todoNesnesi.getTitle() = " + todoNesnesi.getTitle());
+        System.out.println("todoNesnesi.getTitle() = " +
+                 todoNesnesi.getTitle());
     }
 
 
