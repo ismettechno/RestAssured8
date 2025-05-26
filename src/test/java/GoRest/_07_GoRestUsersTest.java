@@ -79,7 +79,7 @@ public class _07_GoRestUsersTest {
         System.out.println("UserID = " + UserID);
     }
 
-
+    //GetUserById testini yapınız
     @Test(dependsOnMethods = "CreateUser")
     public void GetUserById()
     {
@@ -95,22 +95,53 @@ public class _07_GoRestUsersTest {
        ;
     }
 
-    @Test(enabled = false)
+    // UpdateUser testini yapınız
+    @Test(dependsOnMethods = "GetUserById")
     public void UpdateUser()
     {
+        Map<String,String> uptUser=new HashMap<>();
+        uptUser.put("name","İsmet Temur");
 
+           given()
+                   .spec(reqSpec)
+                   .body(uptUser)
+
+                   .when()
+                   .put("https://gorest.co.in/public/v2/users/"+UserID)
+
+                   .then()
+                   .statusCode(200)
+                   .log().body()
+           ;
     }
 
-    @Test(enabled = false)
+    // DeleteUser testini yapınız
+    @Test(dependsOnMethods = "UpdateUser")
     public void DeleteUser()
     {
+           given()
+                   .spec(reqSpec)
 
+                   .when()
+                   .delete("https://gorest.co.in/public/v2/users/"+UserID)
+
+                   .then()
+                   .statusCode(204)
+           ;
     }
 
-    @Test(enabled = false)
+    @Test(dependsOnMethods = "DeleteUser")
     public void DeleteUserNegative()
     {
+        given()
+                .spec(reqSpec)
 
+                .when()
+                .delete("https://gorest.co.in/public/v2/users/"+UserID)
+
+                .then()
+                .statusCode(404)
+        ;
     }
 
 
