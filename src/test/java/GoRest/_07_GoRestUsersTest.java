@@ -116,7 +116,7 @@ public class _07_GoRestUsersTest {
     }
 
     // DeleteUser testini yapınız
-    @Test(dependsOnMethods = "UpdateUser")
+    @Test(dependsOnMethods = "UpdateUser")     // bu aşamadan sonra class çalıştırılmalı
     public void DeleteUser()
     {
            given()
