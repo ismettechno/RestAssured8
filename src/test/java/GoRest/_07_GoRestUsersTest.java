@@ -80,25 +80,34 @@ public class _07_GoRestUsersTest {
     }
 
 
-    @Test
+    @Test(dependsOnMethods = "CreateUser")
     public void GetUserById()
     {
+        given()
+                .spec(reqSpec)
 
+                .when()
+                .get("https://gorest.co.in/public/v2/users/"+UserID)
+
+                .then()
+                .statusCode(200)  // status validation
+                .body("id", equalTo(UserID))  // data validation
+       ;
     }
 
-    @Test
+    @Test(enabled = false)
     public void UpdateUser()
     {
 
     }
 
-    @Test
+    @Test(enabled = false)
     public void DeleteUser()
     {
 
     }
 
-    @Test
+    @Test(enabled = false)
     public void DeleteUserNegative()
     {
 
