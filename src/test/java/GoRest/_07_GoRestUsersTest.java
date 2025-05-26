@@ -1,0 +1,108 @@
+package GoRest;
+
+import Model.User;
+import com.github.javafaker.Faker;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+
+public class _07_GoRestUsersTest {
+    RequestSpecification reqSpec;
+    Faker randomUreteci=new Faker();
+    int UserID=0;
+
+    @BeforeClass
+    public void Setup() // başlangıç işlemleri
+    {
+        // token ve başlangıç set ayarları için spec oluşturuluyor
+        reqSpec=new RequestSpecBuilder()   // istek paketi setlenmesi
+                .setContentType(ContentType.JSON)  // giden body cinsi
+                .addHeader("Authorization","Bearer f92bf3f56439b631d9ed928b3540968e747c8e75309c876420fb349cbb420ed1")
+                .log(LogDetail.URI)  // log.uri
+                .build();
+
+    }
+
+
+    @Test
+    public void CreateUser()
+    {
+        // giden body ye ihtiyacım
+//  giden body hazırlama :  1.Yöntem
+//        String bodyUser="{" +
+//                "  \"name\":\"{{$randomFullName}}\"," +
+//                "  \"gender\":\"male\"," +
+//                "  \"email\":\"{{$randomEmail}}\"," +
+//                "  \"status\":\"active\"" +
+//                "}";
+
+//  giden body hazırlama :  2.Yöntem
+//        User newUser2=new User();
+//        newUser2.setName("İsmet Temur");
+//        newUser2.setGender("male");
+//        newUser2.setEmail("İsmetTemur@gmail.com");
+//        newUser2.setStatus("active");
+
+//  giden body hazırlama :  3.Yöntem
+        String rndFullName= randomUreteci.name().fullName();
+        String rndEmail=randomUreteci.internet().emailAddress();
+
+        Map<String,String> newUser=new HashMap<>();
+        newUser.put("name",rndFullName);
+        newUser.put("gender","male");
+        newUser.put("email",rndEmail);
+        newUser.put("status","active");
+
+        UserID=   //collection varible daki UserID y set ettim
+        given()
+                .spec(reqSpec) //json ı seçtim token ı verdim
+                .body(newUser)  // giden body yi verdim
+
+                .when()
+                .post("https://gorest.co.in/public/v2/users")
+
+                .then()
+                .statusCode(201)
+                .log().body()  // gelen data yı yazdır
+                .extract().path("id")
+        ;
+
+        System.out.println("UserID = " + UserID);
+    }
+
+
+    @Test
+    public void GetUserById()
+    {
+
+    }
+
+    @Test
+    public void UpdateUser()
+    {
+
+    }
+
+    @Test
+    public void DeleteUser()
+    {
+
+    }
+
+    @Test
+    public void DeleteUserNegative()
+    {
+
+    }
+
+
+}
