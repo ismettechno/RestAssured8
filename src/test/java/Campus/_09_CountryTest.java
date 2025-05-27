@@ -77,6 +77,8 @@ public class _09_CountryTest {
         System.out.println("CountryID = " + CountryID);
     }
 
+
+
     @Test(dependsOnMethods = "CreateCountry")
     public void UpdateCountry()
     {
@@ -129,6 +131,10 @@ public class _09_CountryTest {
     }
 
 
-    // TODO:
+    // TODO: GetCountryId ->  get("school-service/api/countries/"+CountryID) bir tane country get
+    //       AllCountryId ->  get("school-service/api/countries"); id leri list şeklinde alıcaksınız
+    //1- GetCountryById yi Create den sonra ya ekleyiniz.
+    //2- CreateCountryNegative   Create den sonra ya ekleyiniz.
+    //3- Bütün Country leri siliniz. (Günün sorusu)
 
 }
