@@ -98,8 +98,36 @@ public class _09_CountryTest {
         ;
     }
 
+    @Test(dependsOnMethods = "UpdateCountry")
+    public void DeleteCountry() {
+
+        given()
+                .spec(reqSpec)
+
+                .when()
+                .delete("https://test.mersys.io/school-service/api/countries/"+CountryID)
+
+                .then()
+                .log().body()
+                .statusCode(200)
+       ;
+    }
+
+    @Test(dependsOnMethods = "DeleteCountry")
+    public void DeleteCountryNegative() {
+        given()
+                .spec(reqSpec)
+
+                .when()
+                .delete("https://test.mersys.io/school-service/api/countries/"+CountryID)
+
+                .then()
+                .log().body()
+                .statusCode(400)
+        ;
+    }
 
 
-
+    // TODO:
 
 }
