@@ -20,9 +20,10 @@ public class _09_CountryTest {
     RequestSpecification reqSpec;
     String CountryID = "";
 
-
     @BeforeClass
     public void Setup() {
+        baseURI ="https://test.mersys.io"; // RestAsuured un kendi değişkeni
+
         // login ol , token al, spec i hazırla
         Map<String, String> credential = new HashMap<>();
         credential.put("username", "Campus25");
@@ -35,7 +36,7 @@ public class _09_CountryTest {
                         .body(credential)
 
                         .when()
-                        .post("https://test.mersys.io/auth/login")
+                        .post("/auth/login")// eğer http ile balamıyorsa baseURI başa eklenir.
 
                         .then()
                         .log().body()
@@ -65,7 +66,7 @@ public class _09_CountryTest {
                 .body(newCountry)
 
                 .when()
-                .post("https://test.mersys.io/school-service/api/countries")
+                .post("/school-service/api/countries")
 
                 .then()
                 .log().body()
@@ -90,7 +91,7 @@ public class _09_CountryTest {
                 .body(uptCountry)
 
                 .when()
-                .put("https://test.mersys.io/school-service/api/countries")
+                .put("/school-service/api/countries")
 
                 .then()
                 .log().body()
@@ -105,7 +106,7 @@ public class _09_CountryTest {
                 .spec(reqSpec)
 
                 .when()
-                .delete("https://test.mersys.io/school-service/api/countries/"+CountryID)
+                .delete("/school-service/api/countries/"+CountryID)
 
                 .then()
                 .log().body()
@@ -119,7 +120,7 @@ public class _09_CountryTest {
                 .spec(reqSpec)
 
                 .when()
-                .delete("https://test.mersys.io/school-service/api/countries/"+CountryID)
+                .delete("/school-service/api/countries/"+CountryID)
 
                 .then()
                 .log().body()
