@@ -22,7 +22,7 @@ public class _09_CountryTest {
 
     @BeforeClass
     public void Setup() {
-        baseURI ="https://test.mersys.io"; // RestAsuured un kendi değişkeni
+        baseURI ="https://test.mersys.io"; // RestAsured un kendi değişkeni
 
         // login ol , token al, spec i hazırla
         Map<String, String> credential = new HashMap<>();
@@ -36,7 +36,7 @@ public class _09_CountryTest {
                         .body(credential)
 
                         .when()
-                        .post("/auth/login")// eğer http ile balamıyorsa baseURI başa eklenir.
+                        .post("/auth/login")// eğer http ile başlamıyorsa baseURI başa otomatik eklenir.
 
                         .then()
                         .log().body()
