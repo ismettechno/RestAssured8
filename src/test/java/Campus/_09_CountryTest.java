@@ -76,5 +76,30 @@ public class _09_CountryTest {
         System.out.println("CountryID = " + CountryID);
     }
 
+    @Test(dependsOnMethods = "CreateCountry")
+    public void UpdateCountry()
+    {
+        Map<String, String> uptCountry = new HashMap<>();
+        uptCountry.put("id", CountryID);
+        uptCountry.put("name", "İsmet Ülkesi"+randomUreteci.number().digits(5));
+        uptCountry.put("code", "is2323"+randomUreteci.number().digits(5));
+
+
+        given()
+                .spec(reqSpec)
+                .body(uptCountry)
+
+                .when()
+                .put("https://test.mersys.io/school-service/api/countries")
+
+                .then()
+                .log().body()
+                .statusCode(200)
+        ;
+    }
+
+
+
+
 
 }
