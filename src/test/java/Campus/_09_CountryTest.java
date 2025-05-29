@@ -4,11 +4,13 @@ import com.github.javafaker.Country;
 import com.github.javafaker.Faker;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
@@ -136,5 +138,74 @@ public class _09_CountryTest {
     //1- GetCountryById yi Create den sonra ya ekleyiniz.
     //2- CreateCountryNegative   Create den sonra ya ekleyiniz.
     //3- Bütün Country leri siliniz. (Günün sorusu)
+
+    @Test
+    public void deleteAllCountries()
+    {
+        List<String> countryIds=
+        given()
+                .spec(reqSpec)
+
+                .when()
+                .get("/school-service/api/countries")
+
+                .then()
+                //.log().body()
+                .extract().jsonPath().getList("id")
+        ;
+
+        System.out.println("countryIds = " + countryIds);
+
+        for (String id : countryIds){
+
+            Response response=
+            given()
+                    .spec(reqSpec)
+                    .when()
+                    .delete("/school-service/api/countries/"+id)
+                    .then()
+                    //.log().body()
+                    .extract().response();
+
+            if (response.getStatusCode() == 200)
+                System.out.println("Başarıyla silindi");
+            else
+                System.out.println("Silinemedi : "+ response.path("message"));
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
