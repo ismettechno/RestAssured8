@@ -142,6 +142,7 @@ public class _09_CountryTest {
     @Test
     public void deleteAllCountries()
     {
+        // Önce id leri alalım
         List<String> countryIds=
         given()
                 .spec(reqSpec)
@@ -156,6 +157,7 @@ public class _09_CountryTest {
 
         System.out.println("countryIds = " + countryIds);
 
+        // Sonra for döngüsü ile teker teker silelim
         for (String id : countryIds){
 
             Response response=
